@@ -23,10 +23,13 @@ app.get('/notes',(req,res)=>{
 app.delete('/notes/:index',(req,res)=>{
     delete notes[req.params.index];
     res.send("note deleted successfully.")
-    console.log(notes);
-    
-    
+    console.log(notes); 
 })
 
+app.patch('/notes/:index',(req,res)=>{
+    const newDesc = req.body.description;
+    notes[req.params.index].description = newDesc;
+    res.send('Your Description updated successfully.')
+})
 
 module.exports = app
