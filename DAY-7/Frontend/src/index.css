@@ -17,14 +17,44 @@ html{
 }
 
 .notes{
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
-  padding: 3rem;
+  padding: 2rem;
 }
 .note{
+
   background-color: #494949;
   padding: 1rem;
   border-radius: 0.7rem;
-  max-width: 30rem;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
 
+}
+.note-create-form{
+  width: 100vw;
+  height: 5vh;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+ background-color: rgb(110, 80, 80);
+  padding: 3rem;
+}
+.note-create-form input,button{
+   text-align: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+}
+button{
+  background-color: #1bbe1b;
+}
+button:active{
+  scale: 0.98;
+}
+.delete{
+  background-color: rgb(155, 34, 34);
+  font-size: 1rem;
 }
