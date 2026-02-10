@@ -6,9 +6,11 @@ const App = () => {
 
 
 
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [editId,setEditId] = useState(null);
+  const [btnValue,setBtnValue] = useState('Create Note');
 
   console.log('app is running');
 
@@ -26,7 +28,19 @@ const App = () => {
   function submitHandler(e) {
     e.preventDefault();
 
-    console.log(title, description);
+    if(editId){
+      axios.patch(`http://localhost:3000/api/notes/${editId}`,{description})
+      .then(res=>{
+        console.log(res.data);
+        fetchNotes();
+        setEditId(null);
+        setTitle('');
+        setDescription('');
+        setBtnValue("Create Note")
+      }); 
+    }
+    else{
+      console.log(title, description);
     axios.post('http://localhost:3000/api/notes', {
       title, description
     })
@@ -34,8 +48,16 @@ const App = () => {
         console.log(res.data);
         fetchNotes()
       })
+    }
   }
 
+  function editHandler(note){
+      setTitle(note.title);
+      setDescription(note.description);
+      setEditId(note._id);
+      setBtnValue("Update Desc");
+      
+  }
   function handleDelete(noteId) {
     console.log(noteId);
     axios.delete(`http://localhost:3000/api/notes/${noteId}`)
@@ -52,13 +74,20 @@ const App = () => {
       <form className='note-create-form' onSubmit={(e) => {
         submitHandler(e)
       }}>
-        <input name='title' onChange={(e) => {
+        <input 
+        name='title' 
+        onChange={(e) => {
           setTitle(e.target.value)
-        }} value={title} type="text" placeholder='Enter Title' />
+        }} 
+        disabled = {editId!==null}
+        value={title} 
+        type="text" 
+        placeholder='Enter Title' />
+
         <input name='description' onChange={(e) => {
           setDescription(e.target.value)
         }} value={description} type="text" placeholder='Enter Description' />
-        <button>Create Note</button>
+        <button>{btnValue}</button>
       </form>
 
       <div className="notes">
@@ -66,7 +95,9 @@ const App = () => {
           notes.map((note) => {
             return <div key={note.id} className="note">
               <h1>{note.title}</h1>
-              <p>{note.description}</p>
+              <p>{note.description} <button onClick={()=>editHandler(note)} className='editBtn'>edit</button></p>
+              
+              <br />
               <button onClick={() => {
                 handleDelete(note._id)
               }} className='delete'>delete</button>

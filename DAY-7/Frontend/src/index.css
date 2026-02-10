@@ -58,3 +58,8 @@ button:active{
   background-color: rgb(155, 34, 34);
   font-size: 1rem;
 }
+.editBtn{
+  background-color: wheat;
+  padding: 0.3rem 1rem;
+  font-weight: 700;
+}
