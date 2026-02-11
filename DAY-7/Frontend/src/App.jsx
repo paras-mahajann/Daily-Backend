@@ -15,7 +15,7 @@ const App = () => {
   console.log('app is running');
 
   function fetchNotes() {
-    axios.get('http://localhost:3000/api/notes')
+    axios.get('https://day-7-e1bv.onrender.com/api/notes')
       .then((res) => {
         setNotes(res.data.notes);
       })
@@ -29,7 +29,7 @@ const App = () => {
     e.preventDefault();
 
     if(editId){
-      axios.patch(`http://localhost:3000/api/notes/${editId}`,{description})
+      axios.patch(`https://day-7-e1bv.onrender.com/api/notes/${editId}`,{description})
       .then(res=>{
         console.log(res.data);
         fetchNotes();
@@ -41,7 +41,7 @@ const App = () => {
     }
     else{
       console.log(title, description);
-    axios.post('http://localhost:3000/api/notes', {
+    axios.post('https://day-7-e1bv.onrender.com/api/notes', {
       title, description
     })
       .then(res => {
@@ -60,7 +60,7 @@ const App = () => {
   }
   function handleDelete(noteId) {
     console.log(noteId);
-    axios.delete(`http://localhost:3000/api/notes/${noteId}`)
+    axios.delete(`https://day-7-e1bv.onrender.com/api/notes/${noteId}`)
     .then(res=>{
       console.log(res.data);
       fetchNotes()
