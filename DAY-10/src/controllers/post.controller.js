@@ -107,7 +107,7 @@ async function getPostDetailsController(req,res) {
         })
     }
 
-    const isValidUser = userId==post.user;
+    
 
     if(!isValidUser){
         return res.status(403).json({
