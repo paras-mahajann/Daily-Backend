@@ -10,26 +10,7 @@ const imageKit = new ImageKit({
 
 async function createPostController(req,res){
     
-    const {caption} = req.body;
-
-    const token = req.cookies.token;
-
-    if(!token){
-        return res.status(401).json({
-            message:"Token not provided, Unauthorized access"
-        })
-    }
-    let decoded;
-    try {
-        decoded =  jwt.verify(token,process.env.JWT_SECRET);
-    } catch (err) {
-        return res.status(401).json({
-            message:"user not authorized"
-        })
-    }
-
-    console.log(decoded);
-    
+    const {caption} = req.body;    
 
     const file = await imageKit.files.upload({
         file:await toFile(Buffer.from(req.file.buffer),'file'),
@@ -41,7 +22,7 @@ async function createPostController(req,res){
     const post = await postModel.create({
         caption,
         imgUrl:file.url,
-        user:decoded.id
+        user:req.user.id
 
     })
 
@@ -54,18 +35,8 @@ async function createPostController(req,res){
 
 async function getPostController(req,res){
 
-    const token = req.cookies.token;
-    let decoded = null;
-   
-    try {
-        decoded = jwt.verify(token,process.env.JWT_SECRET);        
-    } catch (error) {
-        return res.status(401).json({
-            message:"Token invalid!"
-        })
-    }
-
-    const userId = decoded.id;
+    
+    const userId = req.user.id;
 
     const posts = await postModel.find({
         user:userId
@@ -80,22 +51,9 @@ async function getPostController(req,res){
 async function getPostDetailsController(req,res) {
     const token = req.cookies.token;
 
-    if(!token){
-        return res.status(401).json({
-            message:"Unauthorized access"
-        })
-    }
+   
 
-    let decoded = null;
-    try {
-        decoded = jwt.verify(token,process.env.JWT_SECRET)
-    } catch (error) {
-        return res.status(401).json({
-            message:"Invalid Token"
-        })
-    }
-
-    const userId = decoded.id;
+    const userId = req.user.id;
 
     const postId = req.params.postId;
 
@@ -124,5 +82,5 @@ async function getPostDetailsController(req,res) {
 module.exports = {
     createPostController,
     getPostController,
-    
+    getPostDetailsController
 }
