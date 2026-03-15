@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import "../styles/form.scss"
 import { Link } from 'react-router'
-import axios from 'axios'
+import { useAuth } from '../hooks/useAuth'
 
 const Login = () => {
 
-  const [username,setUsername] = useState("");
-  const [password,setPassword] = useState("");
+  const [email,setUsername] = useState("")
+  const [password,setPassword] = useState("")
 
+  const {handleLogin} = useAuth()
+  
   function submitHandler(e){
     e.preventDefault();
 
-    axios.post("http://localhost:3000/api/auth/login",{username,password},{withCredentials:true})
+    handleLogin(email,password)    
     .then(res=>{
-      console.log(res.data);
-      
+        console.log(res);        
     })
+
   }
 
   return (
