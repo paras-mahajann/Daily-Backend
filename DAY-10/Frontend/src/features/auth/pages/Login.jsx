@@ -24,8 +24,8 @@ const Login = () => {
 
     handleLogin(email,password)    
     .then(res=>{
-            
-        navigate('/')   
+        console.log(res);    
+        navigate('/');
     })
 
   }
