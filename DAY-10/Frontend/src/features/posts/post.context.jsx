@@ -8,9 +8,8 @@ export const PostContextProvider =({children})=>{
     const [feed,setFeed] = useState(null)
 
 
-    return (
-        <PostContext.Provider value={{loading,setLoading,post,setPost,feed,setFeed}}>
+    return(<PostContext.Provider value={{loading,setLoading,post,setPost,feed,setFeed}}>
             {children}
-        </PostContext.Provider>
-    )
+        </PostContext.Provider>)
+    
 }

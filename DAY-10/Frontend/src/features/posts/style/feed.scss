@@ -9,6 +9,9 @@
 
         .posts{
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
         }
 
         .post{
@@ -16,7 +19,8 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            background-color: rgb(201, 141, 141);
+            background-color: rgb(39, 33, 33);
+            border-radius: 0.75rem;
         
 
             .user{
