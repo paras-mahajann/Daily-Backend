@@ -17,6 +17,8 @@ const postSchema = new mongoose.Schema({
         require:[true,"userID is required for creating a post"]
     }
 
+},{
+    timestamps:true
 })
 
 

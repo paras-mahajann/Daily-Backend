@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     bio:String,
     profileImage:{
         type:String,
-        default:'https://ik.imagekit.io/2oxiybuer/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3485.avif'
+        default:'https://placehold.co/80x80/png?text=User'
     }
 });
 
