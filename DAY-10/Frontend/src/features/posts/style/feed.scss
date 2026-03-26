@@ -52,13 +52,16 @@
                     display: flex;
                     gap: 0.75rem;
                 }
-                .like{
-                    color: red;
-                }
                 svg{
                     width:1rem;
                     aspect-ratio: 1/1;
                     color: white;
+                    // .like{
+                    //     color: red;
+                    // }
+                }
+                .like{
+                    color: red;
                 }
                 button{
                     background-color: transparent;
