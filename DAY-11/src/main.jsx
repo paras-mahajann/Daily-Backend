@@ -6,6 +6,6 @@ import FaceExpression from './features/Expression/components/FaceExpression.jsx'
 import GazeTracker from './features/Expression/components/GazeTracker.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <GazeTracker/>
-  // <FaceExpression/>
+  // <GazeTracker/>
+  <FaceExpression/>
 )
