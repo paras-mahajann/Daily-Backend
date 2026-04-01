@@ -8,6 +8,10 @@ app.use(express.json());
 app.use(cookieParser())
 
 
+const authRoutes = require('./routes/auth.route')
+
+app.use('/api/auth',authRoutes);
+
 
 
 
