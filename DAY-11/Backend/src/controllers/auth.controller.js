@@ -110,7 +110,7 @@ async function logoutUser(req,res) {
     }
     res.clearCookie('token');
 
-    redis.set(token,Date.now().toString());
+    redis.set(token,Date.now().toString(),"EX",60*60);
 
     res.status(201).json({
         message:"logout successfully."
