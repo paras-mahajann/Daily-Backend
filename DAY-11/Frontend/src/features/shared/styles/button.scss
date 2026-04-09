@@ -1,10 +1,14 @@
 .button{
-    background-color: #4caf50;
+    background-color: #dd4200;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    outline: none;
     font-size: 16px;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
