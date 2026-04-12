@@ -17,6 +17,12 @@ export const useAuth = () =>{
         setLoading(true);
         const data = await login({username,email,password});
         setUser(data.user);
+        setLoading(false)
+    }
+    async function handleGetMe() {
+        setLoading(true);
+        const data = await getMe();
+        setUser(data.user);
         setLoading(false);
     }
 }
