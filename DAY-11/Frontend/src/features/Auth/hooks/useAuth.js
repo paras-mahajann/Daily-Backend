@@ -19,16 +19,5 @@ export const useAuth = () =>{
         setUser(data.user);
         setLoading(false)
     }
-    async function handleLogout() {
-        setLoading(true);
-        const data = await logout();
-        setUser(null);
-        setLoading(false);
-    }
-    async function handleGetMe() {
-        setLoading(true);
-        const data = await getMe();
-        setUser(data.user);
-        setLoading(false);
-    }
+  
 }
