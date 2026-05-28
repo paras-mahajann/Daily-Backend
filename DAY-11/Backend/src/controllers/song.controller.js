@@ -10,24 +10,30 @@ async function uploadSong(req,res) {
     const songBuffer = req.file.buffer;
     const mood = req.body.mood?.toLowerCase().trim();
 
-    const tags = id3.read(songBuffer);
+    const tags = id3.read(songBuffer) || {};
+    const title = tags.title || req.file.originalname.replace(/\.[^/.]+$/, "");
+    let posterUrl;
     
     const songFile = await storageService.uploadFile({
         buffer:songBuffer,
-        filename:tags.title+".mp3",
+        filename:title+".mp3",
         folder:"/cohort-2/moodify/songs"
     })
 
-    const posterFile = await storageService.uploadFile({
-        buffer:tags.image.imageBuffer,
-        filename:tags.title+".jpeg",
-        folder:"/cohort-2/moodify/posters"
-    })
+    if(tags.image?.imageBuffer) {
+        const posterFile = await storageService.uploadFile({
+            buffer:tags.image.imageBuffer,
+            filename:title+".jpeg",
+            folder:"/cohort-2/moodify/posters"
+        })
+
+        posterUrl = posterFile.url;
+    }
 
     const song = await songModel.create({
-        title:tags.title,
+        title,
         url:songFile.url,
-        posterUrl:posterFile.url,
+        posterUrl,
         mood
     })
 

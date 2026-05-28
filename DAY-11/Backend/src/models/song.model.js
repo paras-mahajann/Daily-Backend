@@ -6,8 +6,7 @@ const songSchema = new mongoose.Schema({
         required:true
     },
     posterUrl:{
-        type:String,
-        required:true
+        type:String
     },
     title:{
         type:String,
