@@ -60,7 +60,7 @@ import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
   };
 
   // Detection Loop
-  export const detectLoop = async ({faceLandmarker,videoRef,setEmotion}) => {
+  export const detectLoop = async ({faceLandmarker,videoRef,setEmotion,onDetected}) => {
     if (!faceLandmarker || !videoRef.current) return;
 
     const results = faceLandmarker.detectForVideo(
@@ -72,8 +72,12 @@ import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
       const blendshapes = results.faceBlendshapes[0].categories;
       const detectedEmotion = detectEmotion(blendshapes);
       setEmotion(detectedEmotion);
+
+      if (typeof onDetected === "function") {
+        onDetected(detectedEmotion);
+      }
       return;
     }
 
-    requestAnimationFrame(detectLoop);
+    requestAnimationFrame(() => detectLoop({ faceLandmarker, videoRef, setEmotion, onDetected }));
   };
