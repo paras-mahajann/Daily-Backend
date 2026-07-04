@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+    <script>
+        function getData(){
+            let first_name = document.getElementById('first-name').value;
+            let last_name = document.getElementById('last-name').value;
+            let info = {
+                first_name: first_name,
+                last_name: last_name
+            }
+        
+            document.write(`<label>First Name: ${info.first_name}</label>`,'<br>');
+            document.write(`<label>Last Name: ${info.last_name}</label>`)
+        }
+    </script>
+
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred;
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "1e747934-0371-4a8f-a37b-df8e85bd9f8a",
+      safari_web_id: "web.onesignal.auto.31ca14f2-9a64-44ce-b1fb-164017f55430",
+      notifyButton: {
+        enable:true,
+      },
+    });
+  });
+</script>
+</head>
+<body>
+    <div class="register">
+        <form action="">
+            <label for="first-name">First Name</label>
+            <input type="text" name="" id="first-name">
+            <br><br>
+            <label for="last-name">Last Name</label>
+            <input type="text" name="" id="last-name">
+            <br>
+            <br>
+            <button onclick="getData()">submit</button>
+        </form>
+    </div>
+</body>
+</html>
